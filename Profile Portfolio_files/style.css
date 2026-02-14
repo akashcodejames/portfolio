@@ -1,0 +1,284 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+
+body {
+  background-color: #1e1e1e;
+  font-family: sans-serif;
+  color: #a0a0a0;
+  line-height: 1.6;
+}
+
+.main-container {
+  display: grid;
+  max-width: 1200px;
+  grid-template-columns: 350px 1fr;
+  gap: 40px;
+  padding-top: 50px;
+  margin: auto;
+}
+.sidebar {
+  height: 90vh;
+  background-color: #2a2a2a;
+  border: 1px solid #3a3a3a;
+  border-radius: 16px;
+  padding: 17px;
+}
+.main-content {
+    
+  background-color: #2a2a2a;
+  border: 1px solid #3a3a3a;
+  border-radius: 16px;
+  padding: 17px;
+}
+
+.profile {
+  text-align: center;
+  padding: 30px 0;
+}
+
+.profile img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 1px solid #3a3a3a;
+}
+
+.profile h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-top: 20px;
+  color: #e2e0ce;
+}
+.profile p {
+  background-color: #1e1e1e;
+  padding: 7px 70px;
+  color: #ffbf00;
+  border: 1px solid #3a3a3a;
+  border-radius: 10px;
+  font-size: 0.8rem;
+  display: inline-block;
+  margin-top: 10px;
+}
+.contact {
+  margin-top: 30px;
+  border-top: 2px solid #3a3a3a;
+  padding-top: 20px;
+}
+.label {
+  font-weight: 500;
+  color: #a0a0a0;
+  font-size: 0.9rem;
+}
+.value {
+  color: #a0a0a0;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+.value:hover {
+  color: #e9ebec;
+}
+.email,
+.phone {
+  margin-bottom: 15px;
+}
+
+.social {
+  margin-top: 30px;
+  border-top: 2px solid #3a3a3a;
+  padding-top: 20px;
+  text-align: center;
+}
+.social img {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+  cursor: pointer;
+  filter: invert(74%) sepia(50%) saturate(13%) hue-rotate(192deg)
+    brightness(94%) contrast(92%);
+  transition: filter 0.2s ease;
+}
+.social a {
+  text-decoration: none; /* 🔹 removes blue line */
+}
+.social img:hover {
+  filter: invert(100%) sepia(100%) saturate(100%) hue-rotate(100deg)
+    brightness(100%) contrast(100%);
+}
+
+#navigation {
+  margin-bottom: 30px;
+  border-bottom: 2px solid #3a3a3a;
+  padding: 30px 40px;
+  padding-bottom: 20px;
+}
+nav {
+  display: flex;
+  justify-content: flex-end;
+  gap: 40px;
+}
+
+nav a {
+  text-decoration: none;
+  color: #a0a0a0;
+  font-size: 1.1rem;
+  font-weight: 500;
+  transition: color 0.2s ease;
+  transition: color 0.2s ease;
+}
+.active,
+nav a:hover {
+  color: #ffbf00;
+}
+
+/* about-me */
+
+.heading {
+  color: #e0e0e0;
+  font-size: 2rem;
+  margin-bottom: 4px;
+}
+
+.line {
+  width: 60px;
+  height: 5px;
+  background-color: #ffbf00;
+  margin-bottom: 20px;
+}
+
+.content {
+    margin-top: 15px;
+  text-align: justify;
+}
+.skills {
+  margin-top: 30px;
+  border-top: 2px solid #3a3a3a;
+  padding-top: 20px;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 30px;
+}
+.item img {
+  width: 48px;
+  height: 48px;
+  transition: transform 0.2s ease;
+  filter: invert(78%) sepia(85%) saturate(1444%) hue-rotate(339deg)
+    brightness(97%) contrast(94%);
+}
+.item img:hover {
+  transform: scale(1.3);
+}
+
+.item{
+    padding:20px;
+    border-radius: 10px;
+    border: 2px solid #3a3a3a;
+    background-color: #1e1e1e;
+    text-align: center;
+    margin-bottom: 15px;
+    margin-top: 15px;
+    transition:transform 0.2s ease,box-shadow 0.4s ease;
+    box-shadow: 0px 4px 10px rgba(221, 183, 44, 0.3); /* 🌟 shadow added */
+    
+
+}
+.item h3{
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.item:hover{
+    transform: scale(1.1);
+    box-shadow: 0px 8px 20px rgba(211, 197, 70, 0.765); /* deeper glow on hover */
+}
+
+.education{
+    margin-top: 30px;
+    border-top: 2px solid #3a3a3a;
+    padding-top: 20px;
+}
+
+.edfirst,.edsecond,.edthird{
+    margin-bottom: 30px;
+    padding-left:30px;
+    position: relative;
+}
+
+.year{
+    font-size: 0.9rem;
+    color:#a0a0a0;
+    
+}
+
+.degree{
+    color:#e0e0e0;
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom:15px;
+
+}
+
+.college{
+    font-style: italic;
+    color:#a0a0a0;
+    margin-bottom: 30px;
+}
+
+
+.goal{
+    height:15px;
+    width:15px;
+    border:3px solid #ffbf00;
+    border-radius: 50%;
+    position:absolute;
+    top:4px;
+    left:0px;
+    z-index: 1;
+}
+
+.edtech{
+    position:relative;
+}
+
+.liner{
+    position:absolute;
+    top:0px;
+    left:5px;
+    bottom:0px;
+    width:2px;
+    border: 2px solid #3a3a3a;
+    z-index: 0;
+
+}
+
+/* portfolio */
+
+.portfolio{
+    margin-top: 30px;
+    border-top: 2px solid #3a3a3a;
+    padding-top: 20px;
+}
+
+.project-container{
+    display: flex;
+    grid-template-columns: 1fr 2fr;
+    gap: 30px;
+}
+.project img{
+    height:180px;
+    width:100%;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}

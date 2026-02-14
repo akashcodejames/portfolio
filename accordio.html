@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Accordion (Bootstrap-like) — Pure HTML/CSS/JS</title>
+<style>
+  :root{
+    --accent: #0d6efd;       /* primary color (bootstrap-like) */
+    --bg: #fff;
+    --muted: #6c757d;
+    --border: #e9ecef;
+    --radius: 8px;
+    --shadow: 0 6px 18px rgba(13,110,253,0.06);
+  }
+
+  body{
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    background: #f8f9fa;
+    padding: 32px;
+    color: #212529;
+  }
+
+  .container{
+    max-width: 760px;
+    margin: 0 auto;
+  }
+
+  h1{
+    font-size: 20px;
+    margin-bottom: 18px;
+  }
+
+  /* Accordion wrapper */
+  .accordion{
+    background: var(--bg);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    overflow: hidden;
+  }
+
+  /* Each item */
+  .accordion-item + .accordion-item{
+    border-top: 1px solid var(--border);
+  }
+
+  /* Header button */
+  .accordion-header{
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 16px 18px;
+    font-weight: 600;
+    font-size: 15px;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    color: inherit;
+    outline: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .accordion-header:hover{
+    background: rgba(0,0,0,0.03);
+  }
+
+  .accordion-header:focus{
+    box-shadow: 0 0 0 3px rgba(13,110,253,0.12);
+  }
+
+  .accordion-title{
+    display: inline-flex;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .accordion-sub{
+    font-weight: 500;
+    color: var(--muted);
+    font-size: 13px;
+  }
+
+  /* chevron icon */
+  .chev{
+    width: 24px;
+    height: 24px;
+    display: inline-grid;
+    place-items: center;
+    transition: transform 0.25s ease;
+  }
+
+  .chev svg{
+    width: 16px;
+    height: 16px;
+    display: block;
+  }
+
+  /* rotate when expanded */
+  .accordion-item[aria-expanded="true"] .chev{
+    transform: rotate(180deg);
+  }
+
+  /* Content area: will animate height via JS */
+  .accordion-body{
+    overflow: hidden;
+    /* start collapsed with height 0 */
+    height: 0;
+    transition: height 320ms cubic-bezier(.2,.8,.2,1);
+  }
+
+  .accordion-inner{
+    padding: 16px 18px;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #2c2c2c;
+    background: linear-gradient(180deg, rgba(0,0,0,0.01), transparent);
+  }
+
+  /* small meta line */
+  .meta{
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 8px;
+  }
+
+  /* Responsive */
+  @media (max-width:520px){
+    .accordion-header{ padding: 14px; }
+    .accordion-inner{ padding: 14px; }
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <h1>Accordion (Bootstrap-like)</h1>
+
+    <div class="accordion" id="demoAccordion">
+      <div class="accordion-item" aria-expanded="false">
+        <button class="accordion-header" aria-controls="acc1-body" aria-expanded="false" id="acc1-btn">
+          <div class="accordion-title">
+            <span>Accordion item #1</span>
+            <span class="accordion-sub">Subtitle or short description</span>
+          </div>
+          <span class="chev" aria-hidden="true">
+            <!-- chevron down -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                 stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </span>
+        </button>
+        <div id="acc1-body" class="accordion-body" role="region" aria-labelledby="acc1-btn">
+          <div class="accordion-inner">
+            <p>This is the content of item 1. You can put any HTML here — text, images, lists, forms, etc.</p>
+            <p class="meta">Last updated: 2 days ago</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item" aria-expanded="false">
+        <button class="accordion-header" aria-controls="acc2-body" aria-expanded="false" id="acc2-btn">
+          <div class="accordion-title">
+            <span>Accordion item #2</span>
+            <span class="accordion-sub">Another short subtext</span>
+          </div>
+          <span class="chev" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                 stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </span>
+        </button>
+        <div id="acc2-body" class="accordion-body" role="region" aria-labelledby="acc2-btn">
+          <div class="accordion-inner">
+            <p>Content for item 2. This one demonstrates a longer paragraph to show height transition.</p>
+            <ul>
+              <li>Point A</li>
+              <li>Point B</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item" aria-expanded="false">
+        <button class="accordion-header" aria-controls="acc3-body" aria-expanded="false" id="acc3-btn">
+          <div class="accordion-title">
+            <span>Accordion item #3</span>
+            <span class="accordion-sub">Short note</span>
+          </div>
+          <span class="chev" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                 stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </span>
+        </button>
+        <div id="acc3-body" class="accordion-body" role="region" aria-labelledby="acc3-btn">
+          <div class="accordion-inner">
+            <p>Third item's content. Replace this with whatever you need.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script>
+/*
+  Accordion behavior:
+  - Only one panel open at a time (like bootstrap's default)
+  - Smooth height transition using measured scrollHeight
+  - Accessible: buttons toggle aria-expanded, content has role=region and aria-labelledby
+  - Keyboard: buttons are native <button> so they handle Enter/Space automatically
+*/
+
+(function(){
+  const accordion = document.getElementById('demoAccordion');
+  const items = Array.from(accordion.querySelectorAll('.accordion-item'));
+
+  // Helper: close an item (animated)
+  function closeItem(item){
+    const body = item.querySelector('.accordion-body');
+    const btn = item.querySelector('.accordion-header');
+
+    // set height to current computed to allow transition from current to 0
+    body.style.height = body.scrollHeight + 'px';
+    // force reflow to ensure the browser picks up the starting height
+    void body.offsetHeight;
+    // then set to 0 to animate closed
+    body.style.height = '0px';
+
+    item.setAttribute('aria-expanded', 'false');
+    btn.setAttribute('aria-expanded', 'false');
+  }
+
+  // Helper: open an item (animated)
+  function openItem(item){
+    const body = item.querySelector('.accordion-body');
+    const btn = item.querySelector('.accordion-header');
+
+    // measure content height
+    const full = body.scrollHeight;
+    // set from 0 to measured height
+    body.style.height = full + 'px';
+
+    item.setAttribute('aria-expanded', 'true');
+    btn.setAttribute('aria-expanded', 'true');
+
+    // after transition finishes, remove fixed height so content can grow/shrink naturally
+    const cleanup = () => {
+      // only clear if still expanded (user might have toggled while animating)
+      if (item.getAttribute('aria-expanded') === 'true'){
+        body.style.height = 'auto';
+      }
+      body.removeEventListener('transitionend', cleanup);
+    };
+    body.addEventListener('transitionend', cleanup);
+  }
+
+  // Toggle handler for a button inside accordion-item
+  function toggleItem(item){
+    const expanded = item.getAttribute('aria-expanded') === 'true';
+    if (expanded){
+      closeItem(item);
+    } else {
+      // close others first (only-one-open behavior)
+      items.forEach(i => {
+        if (i !== item && i.getAttribute('aria-expanded') === 'true'){
+          closeItem(i);
+        }
+      });
+      // open this one
+      openItem(item);
+    }
+  }
+
+  // Attach click handlers to all header buttons
+  items.forEach(item => {
+    const btn = item.querySelector('.accordion-header');
+    const body = item.querySelector('.accordion-body');
+
+    // ensure body starts with height 0
+    body.style.height = '0px';
+
+    btn.addEventListener('click', (e) => {
+      toggleItem(item);
+    });
+
+    // Optionally: close when clicking inside body on certain elements? (not here)
+
+    // If the content is programmatically changed and the panel is open (height:auto),
+    // we don't need to do anything. To support dynamic content insertion while open,
+    // you could recalc height when necessary.
+  });
+
+  // Optional: open the first item by default (uncomment if you want)
+  // openItem(items[0]);
+
+  // Accessibility: allow Arrow Up/Down to move between headers (like Bootstrap)
+  const headers = items.map(i => i.querySelector('.accordion-header'));
+  headers.forEach((h, idx) => {
+    h.addEventListener('keydown', (ev) => {
+      if (ev.key === 'ArrowDown'){
+        ev.preventDefault();
+        headers[(idx + 1) % headers.length].focus();
+      } else if (ev.key === 'ArrowUp'){
+        ev.preventDefault();
+        headers[(idx - 1 + headers.length) % headers.length].focus();
+      } else if (ev.key === 'Home'){
+        ev.preventDefault();
+        headers[0].focus();
+      } else if (ev.key === 'End'){
+        ev.preventDefault();
+        headers[headers.length - 1].focus();
+      }
+    });
+  });
+})();
+</script>
+</body>
+</html>

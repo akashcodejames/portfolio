@@ -636,6 +636,12 @@ nav {
 .achievements li strong {
   color: var(--text-primary);
   font-weight: 600;
+  white-space: nowrap;
+}
+
+.achievements li {
+  text-align: left;
+  hyphens: none;
 }
 
 /* ========================================

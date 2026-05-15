@@ -1224,12 +1224,182 @@ nav {
     display: none;
   }
   
-  .main-container {
-    grid-template-columns: 1fr;
+  .main-container { grid-template-columns: 1fr; }
+  * { background: white !important; color: black !important; }
+}
+
+/* ========================================
+   Scroll Progress Bar
+   ======================================== */
+#scroll-progress {
+  position: fixed; top: 0; left: 0; height: 3px; width: 0%;
+  background: linear-gradient(90deg, #667eea, #f093fb, #ffbf00);
+  z-index: 9999; transition: width 0.1s linear;
+}
+
+/* ========================================
+   Mobile Header & Hamburger
+   ======================================== */
+.mobile-header {
+  display: none; position: sticky; top: 0; z-index: 200;
+  background: rgba(15,23,42,0.95); backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border-color);
+  padding: 14px 20px; justify-content: space-between; align-items: center;
+}
+.mobile-logo { font-size: 1.3rem; font-weight: 700; }
+.hamburger {
+  background: none; border: none; cursor: pointer;
+  display: flex; flex-direction: column; gap: 5px; padding: 4px;
+}
+.hamburger span {
+  display: block; width: 26px; height: 2px; background: var(--gold);
+  border-radius: 2px; transition: all 0.3s ease;
+}
+.hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px,5px); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px,-5px); }
+.sidebar-close {
+  display: none; position: absolute; top: 16px; right: 16px;
+  background: none; border: none; color: var(--text-secondary);
+  font-size: 1.4rem; cursor: pointer; transition: color var(--transition-fast);
+}
+.sidebar-close:hover { color: var(--gold); }
+.sidebar-overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(0,0,0,0.6); z-index: 150; backdrop-filter: blur(4px);
+}
+
+/* ========================================
+   Profile Ring
+   ======================================== */
+.profile-img-wrapper { position: relative; display: inline-block; }
+.profile-ring {
+  position: absolute; inset: -6px; border-radius: 50%;
+  background: conic-gradient(from 0deg, #667eea, #f093fb, #ffbf00, #4facfe, #667eea);
+  animation: spin 4s linear infinite; z-index: -1; filter: blur(2px);
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ========================================
+   Hero Badge, Stats & Cursor
+   ======================================== */
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(99,102,241,0.15); border: 1px solid rgba(99,102,241,0.4);
+  color: #a5b4fc; padding: 6px 16px; border-radius: 50px;
+  font-size: 0.85rem; font-weight: 500; margin-bottom: var(--spacing-md);
+}
+.badge-dot {
+  width: 8px; height: 8px; background: #4ade80; border-radius: 50%;
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+@keyframes pulse-dot {
+  0%,100% { box-shadow: 0 0 0 0 rgba(74,222,128,0.5); }
+  50% { box-shadow: 0 0 0 6px rgba(74,222,128,0); }
+}
+.cursor { animation: blink 1s step-end infinite; color: var(--gold); }
+@keyframes blink { 50% { opacity: 0; } }
+
+.hero-stats { display: flex; gap: var(--spacing-xl); margin-top: var(--spacing-lg); flex-wrap: wrap; }
+.hero-stat { display: flex; flex-direction: column; }
+.stat-number { font-size: 2rem; font-weight: 800; color: var(--text-primary); line-height: 1; }
+.stat-suffix { font-size: 1.5rem; font-weight: 800; color: var(--gold); display: inline; }
+.stat-label { font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px; }
+
+/* ========================================
+   Hero Orbs
+   ======================================== */
+.orb { position: absolute; border-radius: 50%; filter: blur(40px); opacity: 0.2; pointer-events: none; }
+.orb-1 { width: 200px; height: 200px; background: #667eea; top: -30px; right: -30px; animation: orbFloat 6s ease-in-out infinite; }
+.orb-2 { width: 150px; height: 150px; background: #f093fb; bottom: 0; right: 60px; animation: orbFloat 8s ease-in-out infinite reverse; }
+.orb-3 { width: 100px; height: 100px; background: #4facfe; top: 50%; left: 0; animation: orbFloat 5s ease-in-out infinite; }
+@keyframes orbFloat { 0%,100% { transform: translate(0,0); } 50% { transform: translate(15px,-15px); } }
+.floating-robot {
+  position: absolute; width: 60px; height: 60px;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(240,147,251,0.1); border: 2px solid var(--border-color);
+  border-radius: 20px; font-size: 1.8rem; bottom: 50%; left: 0;
+  color: #f093fb; animation: float 4s ease-in-out infinite; animation-delay: 1.5s;
+}
+
+/* ========================================
+   About Grid & Cards
+   ======================================== */
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-xl); align-items: start; }
+.about-cards { display: flex; flex-direction: column; gap: var(--spacing-md); }
+.about-card {
+  background: rgba(51,65,85,0.4); border: 1px solid var(--border-color);
+  border-radius: var(--radius-md); padding: var(--spacing-md);
+  display: flex; align-items: flex-start; gap: var(--spacing-md);
+  transition: all var(--transition-normal);
+}
+.about-card:hover { border-color: var(--gold); transform: translateX(6px); box-shadow: 0 8px 24px rgba(255,191,0,0.1); }
+.about-card i { font-size: 1.8rem; color: var(--gold); flex-shrink: 0; }
+.about-card h4 { color: var(--text-primary); font-size: 1rem; font-weight: 600; margin-bottom: 4px; }
+.about-card p { color: var(--text-muted); font-size: 0.85rem; }
+
+/* ========================================
+   GitHub Stats & Featured Project
+   ======================================== */
+.project-featured {
+  border-color: rgba(255,191,0,0.4);
+  box-shadow: 0 0 30px rgba(255,191,0,0.08);
+  position: relative; overflow: visible;
+}
+.project-badge {
+  position: absolute; top: -12px; left: 20px;
+  background: linear-gradient(135deg, #ffbf00, #f093fb);
+  color: #0f172a; font-size: 0.75rem; font-weight: 700;
+  padding: 4px 14px; border-radius: 50px; z-index: 5;
+}
+.project-image-agentic { background: linear-gradient(135deg, #1a1040, #2d1b69, #1a1040); }
+.project-image-k8s { background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); }
+
+.project-header {
+  display: flex; justify-content: space-between;
+  align-items: flex-start; gap: 12px; margin-bottom: var(--spacing-sm); flex-wrap: wrap;
+}
+.project-header h3 { margin-bottom: 0; }
+.github-stats { display: flex; gap: 8px; flex-wrap: wrap; }
+.gh-stat {
+  display: inline-flex; align-items: center; gap: 5px;
+  background: rgba(99,102,241,0.12); border: 1px solid rgba(99,102,241,0.25);
+  color: var(--text-secondary); padding: 4px 10px; border-radius: 20px;
+  font-size: 0.78rem; font-weight: 500; transition: all var(--transition-fast);
+}
+.gh-stat i { color: var(--gold); font-size: 0.75rem; }
+.lang-dot { font-size: 0.6rem !important; color: #3178c6 !important; }
+.gh-stat.loading { opacity: 0.5; }
+.gh-stat.loaded { opacity: 1; }
+.gh-last-updated {
+  font-size: 0.78rem; color: var(--text-muted);
+  margin: var(--spacing-sm) 0; display: flex; align-items: center; gap: 6px;
+}
+.gh-last-updated i { color: var(--gold); }
+
+/* ========================================
+   Responsive for New Elements
+   ======================================== */
+@media (max-width: 968px) {
+  .mobile-header { display: flex; }
+  .sidebar {
+    position: fixed; left: -340px; top: 0; height: 100vh;
+    z-index: 160; transition: left 0.35s cubic-bezier(0.4,0,0.2,1);
+    overflow-y: auto; border-radius: 0 var(--radius-lg) var(--radius-lg) 0; max-height: 100vh;
   }
-  
-  * {
-    background: white !important;
-    color: black !important;
-  }
+  .sidebar.open { left: 0; }
+  .sidebar-close { display: block; }
+  .sidebar-overlay.open { display: block; }
+  .about-grid { grid-template-columns: 1fr; }
+  .hero-stats { gap: var(--spacing-lg); justify-content: center; }
+  .project-header { flex-direction: column; }
+  .main-container { padding: 0 0 40px; }
+  .main-content { border-radius: 0; border-left: none; border-right: none; }
+}
+@media (max-width: 640px) {
+  .hero-badge { font-size: 0.78rem; }
+  .hero-stats { gap: var(--spacing-md); }
+  .stat-number { font-size: 1.6rem; }
+  .github-stats { gap: 6px; }
+  .about-cards { display: none; }
 }

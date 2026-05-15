@@ -668,9 +668,9 @@ nav {
 }
 
 .project:hover {
-  transform: translateY(-10px);
+  transform: translateY(-4px) scale(1.02);
   border-color: var(--gold);
-  box-shadow: 0 20px 40px var(--glow-blue);
+  box-shadow: 0 12px 30px var(--glow-blue);
 }
 
 .project-image {

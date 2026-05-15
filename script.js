@@ -207,21 +207,7 @@ window.addEventListener('scroll', () => {
     });
 });
 
-// ========================================
-// Project Card 3D Tilt
-// ========================================
-document.querySelectorAll('.project').forEach(card => {
-  card.addEventListener('mousemove', (e) => {
-    const rect = card.getBoundingClientRect();
-    const x = e.clientX - rect.left, y = e.clientY - rect.top;
-    const rotX = (y - rect.height / 2) / 18;
-    const rotY = (rect.width / 2 - x) / 18;
-    card.style.transform = `perspective(1000px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateY(-8px)`;
-  });
-  card.addEventListener('mouseleave', () => {
-    card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
-  });
-});
+// Project card hover is handled purely by CSS (gentle scale)
 
 // ========================================
 // Skill Tag Ripple
